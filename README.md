@@ -9,6 +9,10 @@ A small ERP/CRM system for a wholesale/distribution company — customers, produ
 
 > Note: the backend is hosted on Render's free tier, which spins down after inactivity. The first request after idle time can take 30–60 seconds to respond while it wakes up — this is expected, not a bug.
 
+## Demo Recording
+https://drive.google.com/file/d/1gu-2qgzhQubI23GYa7kgH28hfqxvGxCc/view?usp=sharing
+
+
 ## Tech Stack
 - **Backend:** Node.js, TypeScript, Express, PostgreSQL (Supabase), Prisma ORM, JWT auth, Zod validation
 - **Frontend:** React (Vite + TypeScript), React Router, Axios, plain CSS (responsive)
@@ -106,8 +110,6 @@ Full request/response examples: see `insomnia_collection.json` (import via Insom
 - Purchase orders (mentioned in the business context) are not implemented — the brief's "Core Modules Required" section did not list a Purchase Order module, so it was treated as out of scope; happy to add it if needed.
 - Docker/GitHub Actions/S3 image upload (bonus items) not implemented due to time.
 
-## Demo Recording
-[Link to be added — screen walkthrough covering login per role, customer/product creation, and the challan confirm/insufficient-stock/cancel flow]
 
 ## Assumptions Made
 - "Sales challan" quantities and prices are captured as a snapshot on `ChallanItem`, separate from the live `Product` record, per the requirement that challans "should store product snapshot data, not only product ID."
