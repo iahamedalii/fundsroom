@@ -49,7 +49,7 @@
       "parentId": "fld_auth",
       "name": "Login (Admin)",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/auth/login",
+      "url": "https://fundsroom-sdea.onrender.com/auth/login",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"email\": \"admin@erp.test\",\n  \"password\": \"password123\"\n}"
@@ -69,7 +69,7 @@
       "parentId": "fld_auth",
       "name": "Get current user",
       "method": "GET",
-      "url": "{{ _.baseUrl }}/auth/me",
+      "url": "https://fundsroom-sdea.onrender.com/auth/me",
       "body": {},
       "headers": [
         {
@@ -93,7 +93,7 @@
       "parentId": "fld_customers",
       "name": "List customers",
       "method": "GET",
-      "url": "{{ _.baseUrl }}/customers?search=&status=&page=1&limit=20",
+      "url": "https://fundsroom-sdea.onrender.com/customers?search=&status=&page=1&limit=20",
       "body": {},
       "headers": [
         {
@@ -110,7 +110,7 @@
       "parentId": "fld_customers",
       "name": "Create customer",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/customers",
+      "url": "https://fundsroom-sdea.onrender.com/customers",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"name\": \"Ramesh Traders\",\n  \"mobile\": \"9876543210\",\n  \"email\": \"ramesh@traders.com\",\n  \"businessName\": \"Ramesh Traders Pvt Ltd\",\n  \"gstNumber\": \"29ABCDE1234F1Z5\",\n  \"customerType\": \"WHOLESALE\",\n  \"address\": \"MG Road, Bengaluru\",\n  \"status\": \"LEAD\",\n  \"notes\": \"Interested in bulk steel orders\"\n}"
@@ -134,7 +134,7 @@
       "parentId": "fld_customers",
       "name": "Get customer by id",
       "method": "GET",
-      "url": "{{ _.baseUrl }}/customers/{{ _.customerId }}",
+      "url": "https://fundsroom-sdea.onrender.com/customers/{{ _.customerId }}",
       "body": {},
       "headers": [
         {
@@ -151,7 +151,7 @@
       "parentId": "fld_customers",
       "name": "Update customer",
       "method": "PUT",
-      "url": "{{ _.baseUrl }}/customers/{{ _.customerId }}",
+      "url": "https://fundsroom-sdea.onrender.com/customers/{{ _.customerId }}",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"status\": \"ACTIVE\"\n}"
@@ -175,7 +175,7 @@
       "parentId": "fld_customers",
       "name": "Add follow-up note",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/customers/{{ _.customerId }}/follow-ups",
+      "url": "https://fundsroom-sdea.onrender.com/customers/{{ _.customerId }}/follow-ups",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"note\": \"Called customer, will confirm order by Friday\"\n}"
@@ -206,7 +206,7 @@
       "parentId": "fld_products",
       "name": "List products",
       "method": "GET",
-      "url": "{{ _.baseUrl }}/products?search=&lowStock=false&page=1&limit=20",
+      "url": "https://fundsroom-sdea.onrender.com/products?search=&lowStock=false&page=1&limit=20",
       "body": {},
       "headers": [
         {
@@ -223,7 +223,7 @@
       "parentId": "fld_products",
       "name": "Create product",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/products",
+      "url": "https://fundsroom-sdea.onrender.com/products",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"name\": \"PVC Pipe 2 inch\",\n  \"sku\": \"SKU-100\",\n  \"category\": \"Plumbing\",\n  \"unitPrice\": 120.5,\n  \"minStock\": 20,\n  \"location\": \"Warehouse A\"\n}"
@@ -247,7 +247,7 @@
       "parentId": "fld_products",
       "name": "Get product by id",
       "method": "GET",
-      "url": "{{ _.baseUrl }}/products/{{ _.productId }}",
+      "url": "https://fundsroom-sdea.onrender.com/products/{{ _.productId }}",
       "body": {},
       "headers": [
         {
@@ -264,7 +264,7 @@
       "parentId": "fld_products",
       "name": "Update product",
       "method": "PUT",
-      "url": "{{ _.baseUrl }}/products/{{ _.productId }}",
+      "url": "https://fundsroom-sdea.onrender.com/products/{{ _.productId }}",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"unitPrice\": 130\n}"
@@ -288,7 +288,7 @@
       "parentId": "fld_products",
       "name": "Add stock movement (IN)",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/products/{{ _.productId }}/stock-movements",
+      "url": "https://fundsroom-sdea.onrender.com/products/{{ _.productId }}/stock-movements",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"quantity\": 100,\n  \"movementType\": \"IN\",\n  \"reason\": \"New purchase order received\"\n}"
@@ -312,7 +312,7 @@
       "parentId": "fld_products",
       "name": "Add stock movement (OUT - insufficient stock example)",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/products/{{ _.productId }}/stock-movements",
+      "url": "https://fundsroom-sdea.onrender.com/products/{{ _.productId }}/stock-movements",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"quantity\": 999999,\n  \"movementType\": \"OUT\",\n  \"reason\": \"Damage write-off\"\n}"
@@ -343,7 +343,7 @@
       "parentId": "fld_sales_challans",
       "name": "List challans",
       "method": "GET",
-      "url": "{{ _.baseUrl }}/challans?status=&customerId=&page=1&limit=20",
+      "url": "https://fundsroom-sdea.onrender.com/challans?status=&customerId=&page=1&limit=20",
       "body": {},
       "headers": [
         {
@@ -360,7 +360,7 @@
       "parentId": "fld_sales_challans",
       "name": "Create challan (Draft)",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/challans",
+      "url": "https://fundsroom-sdea.onrender.com/challans",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"customerId\": \"{{ _.customerId }}\",\n  \"status\": \"DRAFT\",\n  \"items\": [\n    {\n      \"productId\": \"{{ _.productId }}\",\n      \"quantity\": 5\n    }\n  ]\n}"
@@ -384,7 +384,7 @@
       "parentId": "fld_sales_challans",
       "name": "Create challan (Confirmed - deducts stock immediately)",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/challans",
+      "url": "https://fundsroom-sdea.onrender.com/challans",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"customerId\": \"{{ _.customerId }}\",\n  \"status\": \"CONFIRMED\",\n  \"items\": [\n    {\n      \"productId\": \"{{ _.productId }}\",\n      \"quantity\": 5\n    }\n  ]\n}"
@@ -408,7 +408,7 @@
       "parentId": "fld_sales_challans",
       "name": "Get challan by id",
       "method": "GET",
-      "url": "{{ _.baseUrl }}/challans/{{ _.challanId }}",
+      "url": "https://fundsroom-sdea.onrender.com/challans/{{ _.challanId }}",
       "body": {},
       "headers": [
         {
@@ -425,7 +425,7 @@
       "parentId": "fld_sales_challans",
       "name": "Confirm challan",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/challans/{{ _.challanId }}/confirm",
+      "url": "https://fundsroom-sdea.onrender.com/challans/{{ _.challanId }}/confirm",
       "body": {},
       "headers": [
         {
@@ -442,7 +442,7 @@
       "parentId": "fld_sales_challans",
       "name": "Cancel challan",
       "method": "POST",
-      "url": "{{ _.baseUrl }}/challans/{{ _.challanId }}/cancel",
+      "url": "https://fundsroom-sdea.onrender.com/challans/{{ _.challanId }}/cancel",
       "body": {},
       "headers": [
         {
