@@ -2,10 +2,17 @@
 
 A small ERP/CRM system for a wholesale/distribution company — customers, products/inventory, and a sales challan flow with stock-safe business logic.
 
+## Live Deployment
+- **Frontend:** https://fundsroom-steel.vercel.app
+- **Backend API:** https://fundsroom-sdea.onrender.com
+- **Repository:** https://github.com/iahamedalii/fundsroom (branch: `develop`)
+
+> Note: the backend is hosted on Render's free tier, which spins down after inactivity. The first request after idle time can take 30–60 seconds to respond while it wakes up — this is expected, not a bug.
+
 ## Tech Stack
-- **Backend:** Node.js, TypeScript, Express, PostgreSQL, Prisma ORM, JWT auth, Zod validation
+- **Backend:** Node.js, TypeScript, Express, PostgreSQL (Supabase), Prisma ORM, JWT auth, Zod validation
 - **Frontend:** React (Vite + TypeScript), React Router, Axios, plain CSS (responsive)
-- **Deployment target:** Render/Railway (backend), Vercel/Netlify (frontend), Neon/Supabase (Postgres)
+- **Deployment:** Render (backend), Vercel (frontend), Supabase (Postgres)
 
 ## Architecture (short version)
 - `backend/` — REST API. Layered as `routes -> controllers -> prisma`. `middleware/auth.ts` handles JWT verification + role-based route guards. `middleware/errorHandler.ts` centralizes error responses so controllers stay clean.
@@ -89,17 +96,21 @@ All endpoints except `/auth/login` require `Authorization: Bearer <token>`.
 | POST | /challans/:id/confirm | Admin, Sales, Warehouse | deducts stock, validates availability |
 | POST | /challans/:id/cancel | Admin, Sales | restores stock if it was confirmed |
 
-Full request/response examples: see `postman_collection.json`.
+Full request/response examples: see `insomnia_collection.json` (import via Insomnia → Create → Import From File — it's also Postman-compatible if opened there instead).
 
 ## Known Limitations / Not Implemented
 - No password-reset / user-management UI (users are seeded directly; adding a "manage users" screen was out of scope for the time available).
 - No invoice generation or PDF export (listed as bonus in the brief).
 - No pagination controls in the frontend UI yet — the API supports `page`/`limit`, but the UI currently just calls with defaults (fetches first 20-100).
-- No automated tests (unit/integration) — given the 48-hour window, testing was prioritized manually via Postman.
+- No automated tests (unit/integration) — given the 48-hour window, testing was prioritized manually via Insomnia.
 - Purchase orders (mentioned in the business context) are not implemented — the brief's "Core Modules Required" section did not list a Purchase Order module, so it was treated as out of scope; happy to add it if needed.
 - Docker/GitHub Actions/S3 image upload (bonus items) not implemented due to time.
+
+## Demo Recording
+[Link to be added — screen walkthrough covering login per role, customer/product creation, and the challan confirm/insufficient-stock/cancel flow]
 
 ## Assumptions Made
 - "Sales challan" quantities and prices are captured as a snapshot on `ChallanItem`, separate from the live `Product` record, per the requirement that challans "should store product snapshot data, not only product ID."
 - Confirming a challan can happen either at creation time (`status: "CONFIRMED"` in the create payload) or afterward via a dedicated `/confirm` endpoint on an existing DRAFT — both paths re-validate stock immediately before deducting it.
 - Warehouse role can confirm challans (since confirming affects stock, which is a warehouse concern) in addition to Sales/Admin; only Sales/Admin can create or cancel challans.
+- The deployed backend (Render) connects to Supabase via its **transaction pooler** (port 6543), not the direct connection (port 5432) — Render's network doesn't support the IPv6-only direct connection. Migrations are run locally against the direct connection instead, since PgBouncer's transaction mode doesn't support the prepared statements Prisma migrations need.

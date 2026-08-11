@@ -1,0 +1,457 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-08-12T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v9.0.0",
+  "resources": [
+    {
+      "_id": "wrk_root",
+      "_type": "workspace",
+      "parentId": null,
+      "name": "Mini ERP CRM API",
+      "description": "Insomnia collection for the ERP/CRM Operations Portal case study.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_root",
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "https://fundsroom-sdea.onrender.com",
+        "token": "",
+        "customerId": "",
+        "productId": "",
+        "challanId": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "baseUrl",
+          "token",
+          "customerId",
+          "productId",
+          "challanId"
+        ]
+      },
+      "color": null,
+      "isPrivate": false
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_root",
+      "name": "Auth",
+      "description": ""
+    },
+    {
+      "_id": "req_fld_auth_001",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login (Admin)",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@erp.test\",\n  \"password\": \"password123\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954483
+    },
+    {
+      "_id": "req_fld_auth_002",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Get current user",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/auth/me",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954482
+    },
+    {
+      "_id": "fld_customers",
+      "_type": "request_group",
+      "parentId": "wrk_root",
+      "name": "Customers",
+      "description": ""
+    },
+    {
+      "_id": "req_fld_customers_001",
+      "_type": "request",
+      "parentId": "fld_customers",
+      "name": "List customers",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/customers?search=&status=&page=1&limit=20",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954483
+    },
+    {
+      "_id": "req_fld_customers_002",
+      "_type": "request",
+      "parentId": "fld_customers",
+      "name": "Create customer",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/customers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Ramesh Traders\",\n  \"mobile\": \"9876543210\",\n  \"email\": \"ramesh@traders.com\",\n  \"businessName\": \"Ramesh Traders Pvt Ltd\",\n  \"gstNumber\": \"29ABCDE1234F1Z5\",\n  \"customerType\": \"WHOLESALE\",\n  \"address\": \"MG Road, Bengaluru\",\n  \"status\": \"LEAD\",\n  \"notes\": \"Interested in bulk steel orders\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954482
+    },
+    {
+      "_id": "req_fld_customers_003",
+      "_type": "request",
+      "parentId": "fld_customers",
+      "name": "Get customer by id",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/customers/{{ _.customerId }}",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954481
+    },
+    {
+      "_id": "req_fld_customers_004",
+      "_type": "request",
+      "parentId": "fld_customers",
+      "name": "Update customer",
+      "method": "PUT",
+      "url": "{{ _.baseUrl }}/customers/{{ _.customerId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"ACTIVE\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954480
+    },
+    {
+      "_id": "req_fld_customers_005",
+      "_type": "request",
+      "parentId": "fld_customers",
+      "name": "Add follow-up note",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/customers/{{ _.customerId }}/follow-ups",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"note\": \"Called customer, will confirm order by Friday\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954479
+    },
+    {
+      "_id": "fld_products",
+      "_type": "request_group",
+      "parentId": "wrk_root",
+      "name": "Products",
+      "description": ""
+    },
+    {
+      "_id": "req_fld_products_001",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "List products",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/products?search=&lowStock=false&page=1&limit=20",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954483
+    },
+    {
+      "_id": "req_fld_products_002",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Create product",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/products",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"PVC Pipe 2 inch\",\n  \"sku\": \"SKU-100\",\n  \"category\": \"Plumbing\",\n  \"unitPrice\": 120.5,\n  \"minStock\": 20,\n  \"location\": \"Warehouse A\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954482
+    },
+    {
+      "_id": "req_fld_products_003",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Get product by id",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/products/{{ _.productId }}",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954481
+    },
+    {
+      "_id": "req_fld_products_004",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Update product",
+      "method": "PUT",
+      "url": "{{ _.baseUrl }}/products/{{ _.productId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"unitPrice\": 130\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954480
+    },
+    {
+      "_id": "req_fld_products_005",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Add stock movement (IN)",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/products/{{ _.productId }}/stock-movements",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"quantity\": 100,\n  \"movementType\": \"IN\",\n  \"reason\": \"New purchase order received\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954479
+    },
+    {
+      "_id": "req_fld_products_006",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Add stock movement (OUT - insufficient stock example)",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/products/{{ _.productId }}/stock-movements",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"quantity\": 999999,\n  \"movementType\": \"OUT\",\n  \"reason\": \"Damage write-off\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954478
+    },
+    {
+      "_id": "fld_sales_challans",
+      "_type": "request_group",
+      "parentId": "wrk_root",
+      "name": "Sales Challans",
+      "description": ""
+    },
+    {
+      "_id": "req_fld_sales_challans_001",
+      "_type": "request",
+      "parentId": "fld_sales_challans",
+      "name": "List challans",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/challans?status=&customerId=&page=1&limit=20",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954483
+    },
+    {
+      "_id": "req_fld_sales_challans_002",
+      "_type": "request",
+      "parentId": "fld_sales_challans",
+      "name": "Create challan (Draft)",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/challans",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"customerId\": \"{{ _.customerId }}\",\n  \"status\": \"DRAFT\",\n  \"items\": [\n    {\n      \"productId\": \"{{ _.productId }}\",\n      \"quantity\": 5\n    }\n  ]\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954482
+    },
+    {
+      "_id": "req_fld_sales_challans_003",
+      "_type": "request",
+      "parentId": "fld_sales_challans",
+      "name": "Create challan (Confirmed - deducts stock immediately)",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/challans",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"customerId\": \"{{ _.customerId }}\",\n  \"status\": \"CONFIRMED\",\n  \"items\": [\n    {\n      \"productId\": \"{{ _.productId }}\",\n      \"quantity\": 5\n    }\n  ]\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954481
+    },
+    {
+      "_id": "req_fld_sales_challans_004",
+      "_type": "request",
+      "parentId": "fld_sales_challans",
+      "name": "Get challan by id",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/challans/{{ _.challanId }}",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954480
+    },
+    {
+      "_id": "req_fld_sales_challans_005",
+      "_type": "request",
+      "parentId": "fld_sales_challans",
+      "name": "Confirm challan",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/challans/{{ _.challanId }}/confirm",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954479
+    },
+    {
+      "_id": "req_fld_sales_challans_006",
+      "_type": "request",
+      "parentId": "fld_sales_challans",
+      "name": "Cancel challan",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/challans/{{ _.challanId }}/cancel",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1786473954478
+    }
+  ]
+}
