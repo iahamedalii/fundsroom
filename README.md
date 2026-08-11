@@ -10,7 +10,7 @@ A small ERP/CRM system for a wholesale/distribution company — customers, produ
 > Note: the backend is hosted on Render's free tier, which spins down after inactivity. The first request after idle time can take 30–60 seconds to respond while it wakes up — this is expected, not a bug.
 
 ## Demo Recording
-https://drive.google.com/file/d/1gu-2qgzhQubI23GYa7kgH28hfqxvGxCc/view?usp=sharing
+https://drive.google.com/file/d/1OqIZ-Xz_3SWHXu2Qyz5HYj5-fjomaAhv/view?usp=sharing
 
 
 ## Tech Stack
